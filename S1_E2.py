@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 F = lambda x : 4 * x + 2
 data = 50
 x = np.linspace(-10,10,data)
-
 y = F(x)
 
 Nois = np.random.randn(data) * 5
