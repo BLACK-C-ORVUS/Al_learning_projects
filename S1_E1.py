@@ -1,3 +1,4 @@
+#numpy & matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -9,5 +10,4 @@ y = F(x)
 
 plt.plot(x , y, "-b")
 plt.show()
-
 
