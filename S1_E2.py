@@ -20,6 +20,7 @@ modle.fit(x,y_nois)
 
 g = lambda x : modle.coef_ * x + modle.intercept_
 Y_predicted = g(x)
+
 plt.plot(x,y,"sg")
 plt.plot(x,y_nois,"ob")
 plt.plot(x,Y_predicted,"-r")
