@@ -27,9 +27,11 @@ G = lambda x : model.coef_  * x + model.intercept_
 Y_Predicted = G(X)
 
 
-plt.plot(X, Y, "-b")
+plt.plot(X, Y, "sb")
 plt.plot(X , Y_noise, " or")
-plt.plot(X,Y_Predicted,"sg")
+plt.plot(X,Y_Predicted,"-g")
+plt.title(f"Y = 4 * x + 6,Y_hat = {model.coef_} X + {model.intercept_}")
+plt.legend(["Orginal Line ", "Data with Noise", "Predicted Line"])
 plt.show()
 
 
