@@ -1,13 +1,16 @@
 #numpy & matplotlib
+import numpy as np 
 import matplotlib.pyplot as plt
-import numpy as np
 
-F = lambda x : 4 * x + 2
- 
-x = np.linspace(-10 ,10 ,10)
 
-y = F(x)
+F =  lambda x : 4 * x + 6
 
-plt.plot(x , y, "-b")
+Start_number = -10
+End_number = 10
+number_of_data = 100
+X = np.linspace(Start_number,End_number,number_of_data)
+
+Y = F(X)
+
+plt.plot(X , Y , "ob")
 plt.show()
-
