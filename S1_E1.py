@@ -2,7 +2,6 @@
 import numpy as np 
 import matplotlib.pyplot as plt
 
-
 F =  lambda x : 4 * x + 6
 
 Start_number = -10
