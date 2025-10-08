@@ -1,33 +1,39 @@
-# Test LinearRegression model 
+# LinearRegression model 
+import numpy as np 
 from sklearn.linear_model import LinearRegression
-import numpy as np
 import matplotlib.pyplot as plt
 
-F = lambda x : 4 * x + 2
-data = 50
-x = np.linspace(-10,10,data)
-y = F(x)
 
-Nois = np.random.randn(data) * 5
-y_nois = y + Nois
+F = lambda x : 4 * x + 6
 
-x = x.reshape(-1,1)
-y = y.reshape(-1,1)
-y_nois = y_nois.reshape(-1,1)
+Start_of_number = -10
+End_of_number = 10
+number_of_data = 100
 
-modle = LinearRegression() 
-modle.fit(x,y_nois)
+X = np.linspace(Start_of_number,End_of_number,number_of_data)
+Y = F(X)
 
-g = lambda x : modle.coef_ * x + modle.intercept_
-Y_predicted = g(x)
+Noise = np.random.randn(number_of_data) * 10
+Y_noise = Y + Noise
 
-plt.plot(x,y,"sg")
-plt.plot(x,y_nois,"ob")
-plt.plot(x,Y_predicted,"-r")
-plt.legend(["Orginal data ", "Noise data" ,"Predicted"])
-plt.title(f"y = 4 * x + 2 Y_hat {modle.coef_} * x {modle.intercept_}")
+X = X.reshape(-1,1)
+Y = Y.reshape(-1,1)
+Y_noise = Y_noise.reshape(-1,1)
 
+model = LinearRegression()
+model.fit( X, Y_noise)
+
+G = lambda x : model.coef_  * x + model.intercept_
+Y_Predicted = G(X)
+
+
+plt.plot(X, Y, "-b")
+plt.plot(X , Y_noise, " or")
+plt.plot(X,Y_Predicted,"sg")
 plt.show()
+
+
+
 
 
 
