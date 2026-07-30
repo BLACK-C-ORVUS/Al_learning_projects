@@ -2,6 +2,9 @@
 from  sklearn.datasets import fetch_california_housing
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
+import matplotlib
+matplotlib.use("TkAgg")
+
 import matplotlib.pyplot as plt
 
 dataset = fetch_california_housing()
