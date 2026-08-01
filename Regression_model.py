@@ -9,18 +9,21 @@ def f(x):
 def g(a, b, x):
     return a * x + b
 
+# Create Data
 X = np.linspace(0,100,101) 
 Y = f(X)
 
-
+#Data reshape
 X = X.reshape(101,1)
 Y = Y.reshape(101,1)
-Y_new = Y + np.random.randn(101, 1)* 100
+Y_new = Y + np.random.randn(101, 1)* 100 #Create Data with noise
 
+#Fit model
 model =LinearRegression()
 model.fit(X,Y_new)
 a_new = model.coef_ # A
 b_new = model.intercept_ # B
+#predcit model
 Y_predicted = model.predict(X) # or
 # Y_new = g(a_new, b_new, X)
 
