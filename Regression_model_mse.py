@@ -1,40 +1,56 @@
-#_____Regression_model_MSE____
-import numpy as np 
+import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
-def f(x):
-    return 2 * x + 5
+def f(X):
+    return 2 * X + 5
 
-def g(a, b, x):
-    return a * x + b
 
-# Create Data
-X = np.linspace(0,100,101) 
-Y = f(X)
+def Create_data():
+    X = np.linspace(0,100,101)
+    Y = f(X)
+    X = X.reshape(-1,1)
+    Y = Y.reshape(-1,1)
+    Y_nois = Y +  np.random.randn(101, 1) * 10
+    
+    x_train, x_test, y_train , y_test = train_test_split(
+        X, 
+        Y_nois,
+        test_size=0.2,
+        random_state=69)
+    
+    return x_train, x_test, y_train , y_test
 
-#Data reshape
-X = X.reshape(101,1)
-Y = Y.reshape(101,1)
-Y_new = Y + np.random.randn(101, 1)* 100 #Create Data with noise
 
-#Fit model
-model =LinearRegression()
-model.fit(X,Y_new)
-a_new = model.coef_ # A
-b_new = model.intercept_ # B
-#predcit model
-Y_predicted = model.predict(X) # or
-# Y_new = g(a_new, b_new, X)
 
-ms = mean_squared_error(Y_predicted, Y_new)
+x_train, x_test, y_train , y_test = Create_data()
 
-print(f"A = {a_new} B = {b_new}")
-plt.plot(X, Y, "b-")
-plt.plot(X, Y_new, "ro")
-plt.plot(X, Y_predicted, "g-")
-plt.title(f"y ={a_new} * x + {b_new} ")
-plt.legend(["Real line","Real Data", "Predicted Line"])
+
+model = LinearRegression()
+model.fit(x_train , y_train) #Learning
+
+Y_predic = model.predict(x_train) #Data prediction with the new model 
+mse = mean_squared_error( y_train, Y_predic)
+
+y_test_pred = model.predict(x_test)
+mse_test = mean_squared_error(y_test, y_test_pred)
+
+
+plt.subplot(1,2,1)
+
+plt.plot(x_train, y_train, "bs")
+plt.plot(x_train, Y_predic, "g-")
+plt.title(f"y ={round(model.coef_[0][0])} * x + {round(model.intercept_[0]) } Error: {round(mse)}")
+plt.legend(["Real Data", "Predicted Line"])
+
+
+plt.subplot(1,2,2)
+plt.plot(x_test, y_test, "bs")
+plt.plot(x_test, y_test_pred, "g-")
+plt.title(f"y ={round(model.coef_[0][0])} * x + {round(model.intercept_[0]) } Error: {round(mse_test)}")
+plt.legend(["Real Data", "Predicted Line"])
+
+
 plt.show()
-
